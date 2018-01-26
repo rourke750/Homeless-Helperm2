@@ -1,0 +1,21 @@
+sourceCompatibility = 1.0
+version = '1.0'
+mainClassName = 'HelloWorld'
+
+// Define the contents of the jar file
+jar {
+    manifest {
+        atrributes  'Implementation-Title' : 'Gradle Quickstart' ,
+                    'Implementation-Version' : version,
+                    'Main-Class' : 'HelloWorld'
+    }
+}
+
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', 
+    testCompile group: 'junit', name: 'junit', version: ''
+}
+
+repositories {
+    mavenCentral()
+}
