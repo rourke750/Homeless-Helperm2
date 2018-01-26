@@ -1,19 +1,22 @@
-sourceCompatibility = 1.0
+// WE'RE MISSING A BUNCH OF STUFF.. IT'S NOT WORKING RIGHT NOW
+
+
+sourceCompatibility = 1.8
 version = '1.0'
-mainClassName = 'HelloWorld'
+mainClassName = 'edu.gatech.oad.antlab.pkg1.AntLabMain'
 
 // Define the contents of the jar file
 jar {
     manifest {
         atrributes  'Implementation-Title' : 'Gradle Quickstart' ,
                     'Implementation-Version' : version,
-                    'Main-Class' : 'HelloWorld'
+                    'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
     }
 }
 
 dependencies {
-    compile group: 'org.hibernate', name: 'hibernate-core', 
-    testCompile group: 'junit', name: 'junit', version: ''
+    // compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final' 
+    testCompile group: 'junit', name: 'junit', version: '4.0+'
 }
 
 repositories {
