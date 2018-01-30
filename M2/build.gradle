@@ -12,24 +12,16 @@
 
 apply plugin: 'java'
 
+task myJavadocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+  classpath = configurations.compile
+}
+
 apply plugin: 'application'
 //set up some variables
 sourceCompatibility = 1.8
 version = '1.0'
 mainClassName = 'edu.gatech.oad.antlab.pkg1.AntLabMain'
-
-//Define the contents of the jar file
-jar  {
-  manifest {
-     attributes  'Implementation-Title' : 'Gradle Quickstart' ,
-                 'Implementation-Version' : version,
-                 //'Class-Path' : "${(configurations.runtime.collect { "${lib}/resources.jar" }).join(' ') }",
-                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
-    }
-
-      destinationDir = file('.')
-      archiveName = 'hello.jar'
-}
 
 dependencies {
     compile name: 'resources'
@@ -41,7 +33,19 @@ dependencies {
 repositories {
    mavenCentral()
    flatDir {
-       dirs 'lib'
+       dirs 'src/main/resources/'
    }
 }
 
+//Define the contents of the jar file
+jar  {
+  manifest {
+     attributes  'Implementation-Title' : 'Gradle Quickstart' ,
+                 'Implementation-Version' : version,
+                 'Class-Path': configurations.compile.collect { 'src/main/resources/' + it.getName() }.join(' '),
+                 'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
+    }
+
+      destinationDir = file('.')
+      archiveName = 'run.jar'
+}
