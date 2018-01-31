@@ -22,9 +22,9 @@ configurations {
 }
 
 dependencies {
-    compile files('./resources.jar')
-    runtime files('./resources.jar')
-    extraLibs files('./resources.jar')
+    compile files('./lib/resources.jar')
+    runtime files('./lib/resources.jar')
+    extraLibs files('./lib/resources.jar')
 	configurations.compile.extendsFrom(configurations.extraLibs)
 }
 
