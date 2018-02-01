@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // //Set a default task, so if you don't provide any, these will be executed.
 // defaultTasks   'jar'
 
@@ -91,12 +92,22 @@
 
 apply plugin: 'java'
 
+=======
+apply plugin: 'java'
+
+task myJavadocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+  classpath = configurations.compile
+}
+
+>>>>>>> refs/remotes/origin/master
 apply plugin: 'application'
 //set up some variables
 sourceCompatibility = 1.8
 version = '1.0'
 mainClassName = 'edu.gatech.oad.antlab.pkg1.AntLabMain'
 
+<<<<<<< HEAD
 //Define the contents of the jar file
 jar  {
   manifest {
@@ -122,4 +133,35 @@ repositories {
    flatDir {
        dirs 'lib'
    }
+=======
+//setup a location for repositories of any libraries that need to be downloaded
+repositories {
+   mavenCentral()
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
+}
+
+dependencies {
+    compile files('./lib/resources.jar')
+    runtime files('./lib/resources.jar')
+    extraLibs files('./lib/resources.jar')
+	configurations.compile.extendsFrom(configurations.extraLibs)
+}
+
+//Define the contents of the jar file
+jar  {
+  doFirst {
+     manifest {
+        attributes  'Implementation-Title' : 'Gradle Quickstart' ,
+                    'Implementation-Version' : version,
+                    'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain'
+       }
+   }
+   from {
+     configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+     }
+>>>>>>> refs/remotes/origin/master
 }
